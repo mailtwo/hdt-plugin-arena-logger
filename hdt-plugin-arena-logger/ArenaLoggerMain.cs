@@ -50,17 +50,22 @@ namespace hdt_plugin_arena_logger
         {
             if (_enabled)
             {
-                string pickName = Database.GetCardFromId(args.Picked.Id).Name;
+                Card pickedCard = Database.GetCardFromId(args.Picked.Id);
+                string pickName = pickedCard.Name;
                 string choicesName = "";
                 foreach (HearthMirror.Objects.Card card in args.Choices)
                 {
                     Card curCard = Database.GetCardFromId(card.Id);
                     choicesName += curCard.Name + "; ";
                 }
-                Log.Info("Card picked. Pick: [" + pickName + "], Choices: [" + choicesName + "}]");
+                if (pickedCard.Type == "Hero")
+                    Log.Info("Hero picked. Pick: [" + pickName + "], Choices: [" + choicesName + "}]");
+                else
+                    Log.Info("Card picked. Pick: [" + pickName + "], Choices: [" + choicesName + "}]");
             }
 
         }
+
         public Version Version
         {
             get { return new Version(0, 1, 1); }
