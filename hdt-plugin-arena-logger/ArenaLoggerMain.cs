@@ -84,7 +84,7 @@ namespace hdt_plugin_arena_logger
         private string MakeCardString(HearthMirror.Objects.Card card)
         {
             Card curCard = Database.GetCardFromId(card.Id);
-            return curCard.Name + "\\" + curCard.Id;
+            return curCard.Name + "/" + curCard.Id;
         }
 
         public Version Version
