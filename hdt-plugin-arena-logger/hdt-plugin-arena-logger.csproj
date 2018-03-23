@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <Platforms>x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.Portable.Compatibility" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="HearthDb">
+      <HintPath>..\..\..\..\..\AppData\Local\HearthstoneDeckTracker\app-1.6.0\HearthDb.dll</HintPath>
+    </Reference>
+    <Reference Include="HearthMirror">
+      <HintPath>..\..\..\..\..\AppData\Local\HearthstoneDeckTracker\app-1.6.0\HearthMirror.dll</HintPath>
+    </Reference>
+    <Reference Include="HearthstoneDeckTracker">
+      <HintPath>..\..\..\..\..\AppData\Local\HearthstoneDeckTracker\app-1.6.0\HearthstoneDeckTracker.exe</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="HearthWatcher">
+      <HintPath>..\..\..\..\..\AppData\Local\HearthstoneDeckTracker\app-1.6.0\HearthWatcher.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>..\..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\PresentationFramework\v4.0_4.0.0.0__31bf3856ad364e35\PresentationFramework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
