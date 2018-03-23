@@ -38,6 +38,7 @@ namespace hdt_plugin_arena_logger
         public void OnLoad()
         {
             _enabled = true;
+            Watchers.ArenaWatcher.OnChoicesChanged += OnChoicesChanged;
             Watchers.ArenaWatcher.OnCardPicked += OnCardPicked;
         }
 
@@ -45,25 +46,45 @@ namespace hdt_plugin_arena_logger
         {
             _enabled = false;
         }
+
+        public void OnChoicesChanged(object sender, ChoicesChangedEventArgs args)
+        {
+            if (_enabled)
+            {
+                string choicesName = MakeChoicesString(args.Choices);
+                Log.Info("Choice changed. Choices: [" + choicesName + "}]");
+            }
+        }
         
         public void OnCardPicked(object sender, CardPickedEventArgs args)
         {
             if (_enabled)
             {
                 Card pickedCard = Database.GetCardFromId(args.Picked.Id);
-                string pickName = pickedCard.Name;
-                string choicesName = "";
-                foreach (HearthMirror.Objects.Card card in args.Choices)
-                {
-                    Card curCard = Database.GetCardFromId(card.Id);
-                    choicesName += curCard.Name + "; ";
-                }
+                string pickName = MakeCardString(args.Picked);
+                string choicesName = MakeChoicesString(args.Choices);
                 if (pickedCard.Type == "Hero")
-                    Log.Info("Hero picked. Pick: [" + pickName + "], Choices: [" + choicesName + "}]");
+                    Log.Info("Hero picked. Pick: [" + pickName + "], Choices: [" + choicesName + "]");
                 else
-                    Log.Info("Card picked. Pick: [" + pickName + "], Choices: [" + choicesName + "}]");
+                    Log.Info("Card picked. Pick: [" + pickName + "], Choices: [" + choicesName + "]");
             }
 
+        }
+
+        private string MakeChoicesString(HearthMirror.Objects.Card[] cardList)
+        {
+            string choicesName = "";
+            foreach (HearthMirror.Objects.Card card in cardList)
+            {
+                choicesName += MakeCardString(card) + "; ";
+            }
+            return choicesName;
+        }
+
+        private string MakeCardString(HearthMirror.Objects.Card card)
+        {
+            Card curCard = Database.GetCardFromId(card.Id);
+            return curCard.Name + "\\" + curCard.Id;
         }
 
         public Version Version
