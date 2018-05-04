@@ -77,7 +77,7 @@ namespace hdt_plugin_arena_logger
                 }
             }
             string choicesName = MakeChoicesString(choices);
-            Log.Info("Choice changed. Choices: [" + choicesName + "}]");
+            Log.Info("Choice changed. Choices: [" + choicesName + "]");
             _prevChoices2 = choices;
         }
         
